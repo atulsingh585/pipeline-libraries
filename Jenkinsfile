@@ -3,4 +3,8 @@ node {
     checkout scm
 }
  
+node {
+    stage 'build'
+    
+}
  
