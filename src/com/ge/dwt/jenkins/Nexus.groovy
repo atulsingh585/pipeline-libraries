@@ -14,7 +14,7 @@ def getPackageVersionsList(Map settings) {
         throw new java.security.InvalidParameterException("getPackageVersions() missing field(s): " + missingFields.join(', '))
     }
 
-    def metadataUrl = 'https://nexus.cloud.corporate.ge.com/nexus/content/repositories/' + settings['repoid'] + '/' + settings['groupid'] + '/' + settings['artifactid'] + '/maven-metadata.xml'
+    def metadataUrl = 'http://nexus.franconnect.net/nexus/content/repositories/' + settings['repoid'] + '/' + settings['groupid'] + '/' + settings['artifactid'] + '/maven-metadata.xml'
     def xml = new XmlSlurper().parseText(new URL(metadataUrl).getText())
 
     def versions = []
@@ -50,7 +50,7 @@ set -ex
 
 export JAVA_HOME=/appl/tools/java/jdk1.8.0_25
 
-wget -v --content-disposition "https://nexus.cloud.corporate.ge.com/nexus/service/local/artifact/maven/content?g=${settings['groupid']}&a=${settings['artifactid']}&r=${settings['srcrepo']}&p=${settings['fileext']}&v=${settings['version']}"
+wget -v --content-disposition "http://nexus.franconnect.net/nexus/service/local/artifact/maven/content?g=${settings['groupid']}&a=${settings['artifactid']}&r=${settings['srcrepo']}&p=${settings['fileext']}&v=${settings['version']}"
 
 /appl/tools/apache-maven-3.1.1/bin/mvn deploy:deploy-file \\
   -DgroupId=${settings['groupid']} \\
@@ -60,7 +60,7 @@ wget -v --content-disposition "https://nexus.cloud.corporate.ge.com/nexus/servic
   -DrepositoryId=nexus \\
   -DgeneratePom=true \\
   -Dfile=./${settings['artifactid']}-${settings['version']}.${settings['fileext']} \\
-  -Durl=https://nexus.cloud.corporate.ge.com/nexus/content/repositories/${settings['dstrepo']}
+  -Durl=http://nexus.franconnect.net/nexus/content/repositories/${settings['dstrepo']}
 """
 }
 
@@ -78,7 +78,7 @@ def deleteArtifact(Map settings) {
         throw new java.security.InvalidParameterException("getPackageVersions() missing field(s): " + missingFields.join(', '))
     }
 
-    def apiUrl = "https://nexus.cloud.corporate.ge.com/nexus/service/local/repositories/${settings.repoid}/content/${settings.groupid}/${settings.artifactid}/${settings.version}"
+    def apiUrl = "http://nexus.franconnect.net/nexus/service/local/repositories/${settings.repoid}/content/${settings.groupid}/${settings.artifactid}/${settings.version}"
     
     httpRequest(authentication: 'nexus', timeout: 30, httpMode: 'DELETE', url: apiUrl, validResponseCodes: '204')
 }
