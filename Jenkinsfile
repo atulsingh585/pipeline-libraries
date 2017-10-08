@@ -7,8 +7,8 @@ node {
 import com.ge.dwt.jenkins.PipelineBuilder  
 def pb = new PipelineBuilder()  
 pb.generateProdDeployPipeline(     
-	jenkins: 'low-risk-vpc',     
-	artifactid: 'myapp',     
+	jenkins: 'master',     
+	artifactid: 'FC',     
 	fileext: 'noarch.rpm',     
 
 ) 
