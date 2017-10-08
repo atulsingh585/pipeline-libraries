@@ -1,11 +1,10 @@
 package com.ge.dwt.jenkins
 
-import com.ge.dwt.jenkins.Jira
 import com.ge.dwt.jenkins.Nexus
 import com.ge.dwt.jenkins.Notifications
 
 def generateProdDeployPipeline(Map settings) {
-    def requiredFields = ['jenkins', 'artifactid', 'fileext', 'chefenv', 'deploycmd']
+    def requiredFields = ['jenkins', 'artifactid', 'fileext']
 
     def missingFields = []
 
@@ -19,13 +18,12 @@ def generateProdDeployPipeline(Map settings) {
         throw new java.security.InvalidParameterException("generateProdDeployPipeline() missing field(s): " + missingFields.join(', '))
     }
 
-    def jiraHelper = new Jira()
     def nexusHelper = new Nexus()
     def notificationsHelper = new Notifications()
 
-    def stagerepo = 'corp-techsol-stage'
-    def preprodrepo = 'corp-techsol-preprod'
-    def prodrepo = 'corp-techsol-prod'
+    def stagerepo = 'fc-techsol-stage'
+    def preprodrepo = 'fc-techsol-preprod'
+    def prodrepo = 'fc-techsol-prod'
     def groupid = 'rpms'
 
     def jenkins = settings['jenkins']
@@ -35,11 +33,7 @@ def generateProdDeployPipeline(Map settings) {
     } else {
         artifactid = [ settings['artifactid'] ]
     }
-    def fileext = settings['fileext']
-    def appslack = settings['appslack']
     def appapprover = settings['appapprover']
-    def chefenv = settings['chefenv']
-    def deploycmd = settings['deploycmd']
 
     stage 'Select Package'
 
@@ -211,7 +205,7 @@ def generateProdDeployPipeline(Map settings) {
         stage 'Deploy'
 
         node(jenkins) {
-            sh "knife ssh \"chef_environment:$chefenv\" \"$deploycmd\" --no-host-key-verify -x deployer -i \$HOME/.ssh/id_rsa_deployer -a ipaddress --exit-on-error --concurrency 1"
+
         }
     } catch (e) {
         currentBuild.result = "FAILED"
@@ -239,7 +233,7 @@ def generateRollbackPipeline(Map settings) {
         throw new java.security.InvalidParameterException("generateRollbackPipeline() missing field(s): " + missingFields.join(', '))
     }
 
-    def jiraHelper = new Jira()
+
     def nexusHelper = new Nexus()
 
     def groupid = 'rpms'
@@ -255,7 +249,6 @@ def generateRollbackPipeline(Map settings) {
     def fileext = settings['fileext']
     def appslack = settings['appslack']
     def appapprover = settings['appapprover']
-    def chefenv = settings['chefenv']
     def rollbackcmd = settings['rollbackcmd']
 
     stage 'Select Package'
@@ -270,33 +263,10 @@ def generateRollbackPipeline(Map settings) {
     def artifact_version = version_input['Version']
     def submitter = version_input['submitter']
     def issue
-    try {
-        issue = jiraHelper.createRollbackIssue(artifactid: artifactid.join(","), version: artifact_version, submitter: submitter)
-    } catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException ex) {
-       // job was cancelled or something, rethrow
-       throw ex
-    } catch (err) {
-       // All other exceptions should be ignored, just mark as unstable
-       currentBuild.result = 'UNSTABLE'
-       echo("There was an error creating a Jira Issue: " + err.getMessage())
-    }
 
     stage 'DevOps Approval'
 
     def devopsRollbackApproverResult = input message: "Approve Production Rollback to ${artifact_version}? (DevOps)", ok: 'Approve', submitterParameter: 'submitter', submitter: 'g00853193' // @CORP Tech Solutions DevOps
-    try {
-        if (issue != null) {
-            jiraHelper.addIssueComment(issue: issue, comment: "Rollback started by ${devopsRollbackApproverResult}")
-            jiraHelper.assignIssue(issue: issue, assignee: devopsRollbackApproverResult)
-        }
-    } catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException ex) {
-       // job was cancelled or something, rethrow
-       throw ex
-    } catch (err) {
-       // All other exceptions should be ignored, just mark as unstable
-       currentBuild.result = 'UNSTABLE'
-       echo("There was an error commenting on a Jira Issue: " + err.getMessage())
-    }
 
     try {
         stage 'Rollback Nexus'
@@ -314,12 +284,12 @@ def generateRollbackPipeline(Map settings) {
 
         stage 'Rollback Servers'
         node(jenkins) {
-            sh "knife ssh \"chef_environment:$chefenv\" \"$rollbackcmd\" --no-host-key-verify -x deployer -i \$HOME/.ssh/id_rsa_deployer -a ipaddress --exit-on-error --concurrency 1"
+            
         }
     } catch (e) {
         currentBuild.result = "FAILED"
         throw e
     } finally {
-        jiraHelper.completeDeployment(issue: issue, result: currentBuild.result)
+        
     }
 }
