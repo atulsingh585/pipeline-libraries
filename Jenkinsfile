@@ -1,8 +1,4 @@
-node {
-    stage 'Checkout'
-    checkout scm
-}
- 
+
 @Library('dwt-jenkins')  
 import com.ge.dwt.jenkins.PipelineBuilder  
 def pb = new PipelineBuilder()  
