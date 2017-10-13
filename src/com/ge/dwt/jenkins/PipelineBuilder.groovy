@@ -21,7 +21,7 @@ def generateProdDeployPipeline(Map settings) {
     def nexusHelper = new Nexus()
     def notificationsHelper = new Notifications()
 
-    def stagerepo = 'fc-techsol-stage'
+    def stagerepo = 'MBE-Stage'
     def preprodrepo = 'fc-techsol-preprod'
     def prodrepo = 'fc-techsol-prod'
     def groupid = 'rpms'
