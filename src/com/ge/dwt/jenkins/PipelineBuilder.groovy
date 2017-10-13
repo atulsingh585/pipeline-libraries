@@ -24,7 +24,7 @@ def generateProdDeployPipeline(Map settings) {
     def stagerepo = 'MBE-Stage'
     def preprodrepo = 'fc-techsol-preprod'
     def prodrepo = 'fc-techsol-prod'
-    def groupid = 'rpms'
+    def groupid = 'rpm'
 
     def jenkins = settings['jenkins']
     def artifactid
