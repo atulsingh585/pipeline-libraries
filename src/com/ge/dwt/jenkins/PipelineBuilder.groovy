@@ -4,7 +4,6 @@ import com.ge.dwt.jenkins.Nexus
 import com.ge.dwt.jenkins.Notifications
 
 def generateProdDeployPipeline(Map settings) {
-//    def requiredFields = ['jenkins', 'artifactid', 'fileext']
     def requiredFields = ['jenkins', 'artifactid', 'fileext']
 
     def missingFields = []
@@ -85,7 +84,7 @@ def generateProdDeployPipeline(Map settings) {
             nexusHelper.copyPackageRepos(
                 groupid: groupid,
                 artifactid: artifactid[i],
-//                fileext: fileext,
+                fileext: fileext,
                 version: artifact_version,
                 srcrepo: stagerepo,
                 dstrepo: preprodrepo
@@ -195,7 +194,7 @@ def generateProdDeployPipeline(Map settings) {
                 nexusHelper.copyPackageRepos(
                     groupid: groupid,
                     artifactid: artifactid[i],
-  //                  fileext: fileext,
+                    fileext: fileext,
                     version: artifact_version,
                     srcrepo: preprodrepo,
                     dstrepo: prodrepo
@@ -248,7 +247,7 @@ def generateRollbackPipeline(Map settings) {
     } else {
         artifactid = [ settings['artifactid'] ]
     }
- //  def fileext = settings['fileext']
+    def fileext = settings['fileext']
     def appslack = settings['appslack']
     def appapprover = settings['appapprover']
     def rollbackcmd = settings['rollbackcmd']
