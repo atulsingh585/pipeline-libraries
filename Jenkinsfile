@@ -7,7 +7,6 @@ pb.generateRollbackPipeline(
 	artifactid: 'MBEFC97',     
 	fileext: 'rpm',
 	repoid: 'MBE-Prod',
-	groupid: 'rpm',
 
 ) 
 
