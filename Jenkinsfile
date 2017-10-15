@@ -5,7 +5,8 @@ def pb = new PipelineBuilder()
 pb.generateRollbackPipeline(     
 	jenkins: 'master',     
 	artifactid: 'MBEFC97',     
-	fileext: 'rpm',     
+	fileext: 'rpm',
+	repoid: 'MBEFC97-Prod',
 
 ) 
 
