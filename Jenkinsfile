@@ -4,7 +4,7 @@ import com.ge.dwt.jenkins.PipelineBuilder
 def pb = new PipelineBuilder()  
 pb.generateProdDeployPipeline(     
 	jenkins: 'master',     
-	artifactid: 'FC',     
+	artifactid: 'MBEFC97',     
 	fileext: 'noarch.rpm',     
 
 ) 
