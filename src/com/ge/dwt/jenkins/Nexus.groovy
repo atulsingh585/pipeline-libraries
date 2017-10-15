@@ -48,7 +48,6 @@ def copyPackageRepos(Map settings) {
 
 set -ex
 
-export JAVA_HOME=/appl/tools/java/jdk1.8.0_25
 
 wget -v --content-disposition "http://nexus.franconnect.net/nexus/service/local/artifact/maven/content?g=${settings['groupid']}&a=${settings['artifactid']}&r=${settings['srcrepo']}&p=${settings['fileext']}&v=${settings['version']}"
 
