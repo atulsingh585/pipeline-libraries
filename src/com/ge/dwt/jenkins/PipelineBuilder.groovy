@@ -111,7 +111,7 @@ def generateProdDeployPipeline(Map settings) {
 
     def appApproverResult
     if (appapprover != null) {
-        appApproverResult = input message: 'Approve Production Deploy? (App Owner)', ok: 'Approve', submitterParameter: 'submitter', submitter: appapprover
+        appApproverResult = input message: 'Approve Production Deploy? (App Owner)', ok: 'Approve', submitterParameter: 'submitter', submitter: atul
     } else {
         appApproverResult = input message: 'Approve Production Deploy? (App Owner)', ok: 'Approve', submitterParameter: 'submitter'
     }
@@ -142,7 +142,7 @@ def generateProdDeployPipeline(Map settings) {
        echo("There was an error sending a Slack notification: " + err.getMessage())
     }
 
-    def devopsLeadApproverResult = input message: 'Approve Production Deploy? (DevOps Lead)', ok: 'Approve', submitterParameter: 'submitter', submitter: 'g01132823' // @Digital DWT DevOps Approvers
+    def devopsLeadApproverResult = input message: 'Approve Production Deploy? (DevOps Lead)', ok: 'Approve', submitterParameter: 'submitter', submitter: 'atul' // @Digital DWT DevOps Approvers
 
     try {
         if (issue != null) {
@@ -170,7 +170,7 @@ def generateProdDeployPipeline(Map settings) {
        echo("There was an error sending a Slack notification: " + err.getMessage())
     }
 
-    def devopsDeployApproverResult = input message: 'Approve Production Deploy? (DevOps)', ok: 'Approve', submitterParameter: 'submitter', submitter: 'g00853193' // @CORP Tech Solutions DevOps
+    def devopsDeployApproverResult = input message: 'Approve Production Deploy? (DevOps)', ok: 'Approve', submitterParameter: 'submitter', submitter: 'atul' // @CORP Tech Solutions DevOps
 
     try {
         if (issue != null) {
@@ -269,7 +269,7 @@ def generateRollbackPipeline(Map settings) {
 
     stage 'DevOps Approval'
 
-    def devopsRollbackApproverResult = input message: "Approve Production Rollback to ${artifact_version}? (DevOps)", ok: 'Approve', submitterParameter: 'submitter', submitter: 'g00853193' // @CORP Tech Solutions DevOps
+    def devopsRollbackApproverResult = input message: "Approve Production Rollback to ${artifact_version}? (DevOps)", ok: 'Approve', submitterParameter: 'submitter', submitter: 'atul' // @CORP Tech Solutions DevOps
 
     try {
         stage 'Rollback Nexus'
