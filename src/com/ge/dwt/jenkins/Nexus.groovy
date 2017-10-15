@@ -31,8 +31,7 @@ def getPackageVersions(Map settings) {
 }
 
 def copyPackageRepos(Map settings) {
-  //  def requiredFields = ['groupid', 'artifactid', 'fileext', 'version', 'srcrepo', 'dstrepo']
-    def requiredFields = ['groupid', 'artifactid', 'version', 'srcrepo', 'dstrepo']
+    def requiredFields = ['groupid', 'artifactid', 'fileext', 'version', 'srcrepo', 'dstrepo']
 
     def missingFields = []
     requiredFields.each { field ->
