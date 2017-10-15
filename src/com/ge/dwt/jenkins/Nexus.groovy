@@ -52,10 +52,10 @@ export JAVA_HOME=/appl/tools/java/jdk1.8.0_25
 
 wget -v --content-disposition "http://nexus.franconnect.net/nexus/service/local/artifact/maven/content?g=${settings['groupid']}&a=${settings['artifactid']}&r=${settings['srcrepo']}&p=${settings['fileext']}&v=${settings['version']}"
 
-/appl/tools/apache-maven-3.1.1/bin/mvn deploy:deploy-file \\
+/var/lib/jenkins/maven/bin/mvn deploy:deploy-file \\
   -DgroupId=${settings['groupid']} \\
   -DartifactId=${settings['artifactid']} \\
-  -Dversion=${settings['version']} \\
+  -Dversion=${settings['version']} \\   
   -Dpackaging=${settings['fileext']} \\
   -DrepositoryId=nexus \\
   -DgeneratePom=true \\
