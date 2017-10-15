@@ -2,7 +2,7 @@
 @Library('dwt-jenkins')  
 import com.ge.dwt.jenkins.PipelineBuilder  
 def pb = new PipelineBuilder()  
-pb.generateProdDeployPipeline(     
+pb.generateRollbackPipeline(     
 	jenkins: 'master',     
 	artifactid: 'MBEFC97',     
 	fileext: 'rpm',     
