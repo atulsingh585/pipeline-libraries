@@ -4,6 +4,7 @@ import com.ge.dwt.jenkins.Nexus
 import com.ge.dwt.jenkins.Notifications
 
 def generateProdDeployPipeline(Map settings) {
+//    def requiredFields = ['jenkins', 'artifactid', 'fileext']
     def requiredFields = ['jenkins', 'artifactid', 'fileext']
 
     def missingFields = []
@@ -22,7 +23,7 @@ def generateProdDeployPipeline(Map settings) {
     def notificationsHelper = new Notifications()
 
     def stagerepo = 'MBE-Stage'
-    def preprodrepo = 'fc-techsol-preprod'
+    def preprodrepo = 'MBE-PreProd'
     def prodrepo = 'MBE-Prod'
     def groupid = 'rpm'
 
@@ -84,7 +85,7 @@ def generateProdDeployPipeline(Map settings) {
             nexusHelper.copyPackageRepos(
                 groupid: groupid,
                 artifactid: artifactid[i],
-                fileext: fileext,
+//                fileext: fileext,
                 version: artifact_version,
                 srcrepo: stagerepo,
                 dstrepo: preprodrepo
@@ -194,7 +195,7 @@ def generateProdDeployPipeline(Map settings) {
                 nexusHelper.copyPackageRepos(
                     groupid: groupid,
                     artifactid: artifactid[i],
-                    fileext: fileext,
+  //                  fileext: fileext,
                     version: artifact_version,
                     srcrepo: preprodrepo,
                     dstrepo: prodrepo
@@ -220,7 +221,8 @@ def generateProdDeployPipeline(Map settings) {
 }
 
 def generateRollbackPipeline(Map settings) {
-    def requiredFields = ['jenkins', 'repoid', 'artifactid', 'fileext', 'chefenv', 'rollbackcmd']
+//    def requiredFields = ['jenkins', 'repoid', 'artifactid', 'fileext', 'chefenv', 'rollbackcmd']
+    def requiredFields = ['jenkins', 'repoid', 'artifactid']
 
     def missingFields = []
     for (int i = 0; i < requiredFields.size(); i++) {
@@ -246,7 +248,7 @@ def generateRollbackPipeline(Map settings) {
     } else {
         artifactid = [ settings['artifactid'] ]
     }
-    def fileext = settings['fileext']
+ //  def fileext = settings['fileext']
     def appslack = settings['appslack']
     def appapprover = settings['appapprover']
     def rollbackcmd = settings['rollbackcmd']
