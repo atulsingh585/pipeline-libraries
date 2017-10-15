@@ -34,6 +34,8 @@ def generateProdDeployPipeline(Map settings) {
         artifactid = [ settings['artifactid'] ]
     }
     def appapprover = settings['appapprover']
+    def fileext = settings['fileext']
+    def appslack = settings['appslack']
 
     stage 'Select Package'
 
@@ -221,7 +223,7 @@ def generateProdDeployPipeline(Map settings) {
 
 def generateRollbackPipeline(Map settings) {
 //    def requiredFields = ['jenkins', 'repoid', 'artifactid', 'fileext', 'chefenv', 'rollbackcmd']
-    def requiredFields = ['jenkins', 'repoid', 'artifactid']
+    def requiredFields = ['jenkins', 'repoid', 'fileext','artifactid']
 
     def missingFields = []
     for (int i = 0; i < requiredFields.size(); i++) {
