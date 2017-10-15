@@ -239,7 +239,7 @@ def generateRollbackPipeline(Map settings) {
 
     def nexusHelper = new Nexus()
 
-    def groupid = 'rpms'
+    def groupid = 'rpm'
 
     def jenkins = settings['jenkins']
     def repoid = settings['repoid']
