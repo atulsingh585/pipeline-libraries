@@ -6,7 +6,7 @@ pb.generateRollbackPipeline(
 	jenkins: 'master',     
 	artifactid: 'MBEFC97',     
 	fileext: 'rpm',
-	repoid: 'MBEFC97-Prod',
+	repoid: 'MBE-Prod',
 
 ) 
 
