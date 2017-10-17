@@ -1,7 +1,7 @@
 
 @Library('dwt-jenkins')  
 import com.ge.dwt.jenkins.PipelineBuilder  
-import com.ge.dwt.jenkins.Notifications ()  
+import com.ge.dwt.jenkins.Notifications()  
 
 def pb = new PipelineBuilder()  
 pb.generateProdDeployPipeline(     
