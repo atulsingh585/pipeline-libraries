@@ -213,7 +213,7 @@ def generateProdDeployPipeline(Map settings) {
         currentBuild.result = "FAILED"
         throw e
     } finally {
-        notificationsHelper.notifyDeploySlack(currentBuild.result, "#devops-notifier")
+        notificationsHelper.notifyDeploySlack(currentBuild.result, "#Techsol-Devops")
         jiraHelper.completeDeployment(issue: issue, result: currentBuild.result)
         if (appslack != null) {
             notificationsHelper.notifyDeploySlack(currentBuild.result, appslack)
