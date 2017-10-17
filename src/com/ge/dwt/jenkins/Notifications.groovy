@@ -59,7 +59,7 @@ def notifySlackApprovalApplicationOwner(String toChannel) {
 def notifySlackApprovalDevOpsLead() {
   def summary = "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' is awaiting approval from DevOps Lead (<${env.BUILD_URL}input/|Jenkins>)"
 
-  def toChannel = "#devops-notifier"
+  def toChannel = "#Techsol-Devops"
 
   def colorCode = '#FF9900' // orange
 
@@ -70,7 +70,7 @@ def notifySlackApprovalDevOpsLead() {
 def notifySlackWaitingDeploy() {
   def summary = "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' is awaiting deployment approval (<${env.BUILD_URL}input/|Jenkins>)"
 
-  def toChannel = "#devops-notifier"
+  def toChannel = "#Techsol-Devops"
 
   def colorCode = '#4169E1' // royalblue
 
