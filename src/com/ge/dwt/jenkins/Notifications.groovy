@@ -22,7 +22,7 @@ def notifyBuildSlack(String buildStatus, String toChannel) {
 }
 
 def notifyDeployIssueSlack(String issue, String toChannel) {
-  def baseJiraUrl = 'https://jira.franconnect.net/jira'
+  def baseJiraUrl = 'https://tr/jira'
 
   def summary = "Deploy Request '${env.JOB_NAME} [${env.BUILD_NUMBER}]' Opened (<${env.BUILD_URL}|Jenkins>) (<${baseJiraUrl}/browse/${issue}|Jira>)"
 
