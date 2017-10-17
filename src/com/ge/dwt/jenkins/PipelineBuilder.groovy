@@ -65,7 +65,7 @@ def generateProdDeployPipeline(Map settings) {
     }
 
     try {
-        notificationsHelper.notifyDeployIssueSlack(issue, '#devops-notifier')
+        notificationsHelper.notifyDeployIssueSlack(issue, '#Techsol-Devops')
         if (appslack != null) {
             notificationsHelper.notifyDeploySlack(issue, appslack)
         }
