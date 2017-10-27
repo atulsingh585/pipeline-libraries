@@ -223,7 +223,7 @@ def generateProdDeployPipeline(Map settings) {
 
 def generateRollbackPipeline(Map settings) {
 //    def requiredFields = ['jenkins', 'repoid', 'artifactid', 'fileext', 'chefenv', 'rollbackcmd']
-    def requiredFields = ['jenkins', 'repoid', 'fileext','artifactid']
+    def requiredFields = ['jenkins', 'repoid', 'fileext','artifactid','appslack']
 
     def missingFields = []
     for (int i = 0; i < requiredFields.size(); i++) {
