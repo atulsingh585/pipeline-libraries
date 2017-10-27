@@ -21,9 +21,9 @@ def generateProdDeployPipeline(Map settings) {
     def nexusHelper = new Nexus()
     def notificationsHelper = new Notifications()
 
-    def stagerepo = 'MBE-Stage'
-    def preprodrepo = 'MBE-PreProd'
-    def prodrepo = 'MBE-Prod'
+    def stagerepo = 'MBE-master'
+    def preprodrepo = 'MBE-STAGING'
+    def prodrepo = 'MBE-PRODUCTION'
     def groupid = 'rpm'
 
     def jenkins = settings['jenkins']
